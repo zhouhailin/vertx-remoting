@@ -65,6 +65,8 @@ public interface RemotingChannel {
 
     /**
      * Requests to close the {@code RemotingChannel} immediately.
+     *
+     * @param listener channel listener
      */
     void close(ChannelListener listener);
 
@@ -78,7 +80,8 @@ public interface RemotingChannel {
     /**
      * Writes a response {@code RemotingCommand} to remote.
      *
-     * @param command the response command
+     * @param command  the response command
+     * @param listener channel listener
      */
     void reply(RemotingCommand command, ChannelListener listener);
 
