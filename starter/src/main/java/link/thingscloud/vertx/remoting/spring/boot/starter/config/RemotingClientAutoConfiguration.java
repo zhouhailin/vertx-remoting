@@ -39,10 +39,10 @@ import java.util.List;
 @Configuration
 @EnableConfigurationProperties({RemotingClientProperties.class})
 @ConditionalOnClass(RemotingClient.class)
-public class RemotingClientAutoConfiguration extends AbstractRemotingAutoConfiguration{
+public class RemotingClientAutoConfiguration extends AbstractRemotingAutoConfiguration {
 
     @Autowired(required = false)
-    private List<RequestProcessor> requestProcessors = Collections.emptyList();
+    private final List<RequestProcessor> requestProcessors = Collections.emptyList();
 
     protected static final Logger LOG = LoggerFactory.getLogger(RemotingClientAutoConfiguration.class);
 

@@ -19,7 +19,7 @@ package link.thingscloud.vertx.remoting.internal;
 
 /**
  * Copy from Bouncy Castle Crypto APIs
- *
+ * <p>
  * This class is a utility class for manipulating byte arrays.
  */
 public final class ByteUtils {
@@ -36,7 +36,7 @@ public final class ByteUtils {
     /**
      * Compare two two-dimensional byte arrays. No null checks are performed.
      *
-     * @param left the first byte array
+     * @param left  the first byte array
      * @param right the second byte array
      * @return the result of the comparison
      */
@@ -56,7 +56,7 @@ public final class ByteUtils {
     /**
      * Compare two byte arrays (perform null checks beforehand).
      *
-     * @param left the first byte array
+     * @param left  the first byte array
      * @param right the second byte array
      * @return the result of the comparison
      */
@@ -81,7 +81,7 @@ public final class ByteUtils {
     /**
      * Compare two three-dimensional byte arrays. No null checks are performed.
      *
-     * @param left the first byte array
+     * @param left  the first byte array
      * @param right the second byte array
      * @return the result of the comparison
      */
@@ -176,7 +176,7 @@ public final class ByteUtils {
         int hexChars = 0;
         for (int i = 0; i < rawChars.length; i++) {
             if ((rawChars[i] >= '0' && rawChars[i] <= '9')
-                || (rawChars[i] >= 'A' && rawChars[i] <= 'F')) {
+                    || (rawChars[i] >= 'A' && rawChars[i] <= 'F')) {
                 hexChars++;
             }
         }
@@ -219,14 +219,14 @@ public final class ByteUtils {
     /**
      * Convert a byte array to the corresponding hex string.
      *
-     * @param input the byte array to be converted
-     * @param prefix the prefix to put at the beginning of the hex string
+     * @param input     the byte array to be converted
+     * @param prefix    the prefix to put at the beginning of the hex string
      * @param seperator a separator string
      * @return the corresponding hex string
      */
     public static String toHexString(byte[] input, String prefix,
-        String seperator) {
-        String result = new String(prefix);
+                                     String seperator) {
+        String result = prefix;
         for (int i = 0; i < input.length; i++) {
             result += HEX_CHARS[(input[i] >>> 4) & 0x0f];
             result += HEX_CHARS[(input[i]) & 0x0f];
@@ -322,7 +322,7 @@ public final class ByteUtils {
      * @throws ArrayIndexOutOfBoundsException if <tt>index</tt> is out of bounds
      */
     public static byte[][] split(byte[] input, int index)
-        throws ArrayIndexOutOfBoundsException {
+            throws ArrayIndexOutOfBoundsException {
         if (index > input.length) {
             throw new ArrayIndexOutOfBoundsException();
         }
@@ -351,7 +351,7 @@ public final class ByteUtils {
      *
      * @param input the input byte array
      * @param start the start index
-     * @param end the end index
+     * @param end   the end index
      * @return a subarray of <tt>input</tt>, ranging from <tt>start</tt>
      * (inclusively) to <tt>end</tt> (exclusively)
      */
@@ -365,7 +365,7 @@ public final class ByteUtils {
      * Rewrite a byte array as a char array
      *
      * @param input -
-     * the byte array
+     *              the byte array
      * @return char array
      */
     public static char[] toCharArray(byte[] input) {

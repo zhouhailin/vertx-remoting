@@ -17,7 +17,6 @@
 
 package link.thingscloud.vertx.remoting.impl;
 
-import io.netty.channel.Channel;
 import link.thingscloud.vertx.remoting.api.channel.RemotingChannel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

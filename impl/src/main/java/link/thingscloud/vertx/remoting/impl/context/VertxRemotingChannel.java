@@ -18,8 +18,6 @@
 package link.thingscloud.vertx.remoting.impl.context;
 
 import io.netty.channel.Channel;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Handler;
 import io.vertx.core.http.WebSocketBase;
 import io.vertx.core.http.impl.WebSocketImplBase;
 import link.thingscloud.vertx.remoting.api.channel.ChannelFuture;

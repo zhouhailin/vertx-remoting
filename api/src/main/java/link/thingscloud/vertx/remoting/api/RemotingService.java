@@ -21,7 +21,6 @@ import link.thingscloud.vertx.remoting.api.command.RemotingCommandFactory;
 import link.thingscloud.vertx.remoting.api.interceptor.Interceptor;
 import link.thingscloud.vertx.remoting.common.Pair;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 

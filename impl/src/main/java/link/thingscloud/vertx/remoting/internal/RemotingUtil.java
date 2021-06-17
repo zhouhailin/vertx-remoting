@@ -33,6 +33,7 @@ public class RemotingUtil {
 
         return "Unknown";
     }
+
     public static String extractRemoteAddress(RemotingChannel channel) {
         SocketAddress socketAddress = channel.remoteAddress();
         if (socketAddress instanceof InetSocketAddress) {

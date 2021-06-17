@@ -8,6 +8,7 @@
 ## vertx-remoting
 
 ```xml
+
 <dependency>
     <groupId>link.thingscloud</groupId>
     <artifactId>vertx-remoting-impl</artifactId>
@@ -18,6 +19,7 @@
 ## vertx-remoting-spring-boot-starter
 
 ```xml
+
 <dependency>
     <groupId>link.thingscloud</groupId>
     <artifactId>vertx-remoting-spring-boot-starter</artifactId>
@@ -32,6 +34,7 @@ server.shutdown=graceful
 ```
 
 ```java
+
 @EnableRemotingClientAutoConfiguration
 @EnableRemotingServerAutoConfiguration
 @SpringBootApplication

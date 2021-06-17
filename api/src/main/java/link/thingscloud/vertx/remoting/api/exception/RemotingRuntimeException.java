@@ -43,7 +43,7 @@ public abstract class RemotingRuntimeException extends RuntimeException {
      * Construct a {@code RemotingRuntimeException} with the specified detail message
      * and nested exception.
      *
-     * @param msg the detail message
+     * @param msg   the detail message
      * @param cause the nested exception
      */
     public RemotingRuntimeException(String msg, Throwable cause) {
@@ -54,7 +54,7 @@ public abstract class RemotingRuntimeException extends RuntimeException {
      * Build a message for the given base message and root cause.
      *
      * @param message the base message
-     * @param cause the root cause
+     * @param cause   the root cause
      * @return the full exception message
      */
     private static String getMessageWithCause(String message, Throwable cause) {

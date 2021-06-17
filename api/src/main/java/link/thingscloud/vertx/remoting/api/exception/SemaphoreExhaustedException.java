@@ -33,9 +33,9 @@ public class SemaphoreExhaustedException extends RemotingRuntimeException {
      * Constructor for SemaphoreExhaustedException with the specified detail message
      * and nested exception.
      *
-     * @param msg the detail message
+     * @param msg   the detail message
      * @param cause the root cause (usually from using an underlying
-     * remoting API such as RMI)
+     *              remoting API such as RMI)
      */
     public SemaphoreExhaustedException(String msg, Throwable cause) {
         super(msg, cause);

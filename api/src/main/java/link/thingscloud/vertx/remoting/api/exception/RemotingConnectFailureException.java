@@ -30,7 +30,7 @@ public class RemotingConnectFailureException extends RemotingAccessException {
      * Constructor for RemotingConnectFailureException with the specified detail message
      * and nested exception.
      *
-     * @param msg the detail message
+     * @param msg   the detail message
      * @param cause the root cause from the remoting API in use
      */
     public RemotingConnectFailureException(String msg, Throwable cause) {

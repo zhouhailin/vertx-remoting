@@ -29,7 +29,7 @@ public class RemotingTimeoutException extends RemotingAccessException {
     /**
      * Constructor for RemotingTimeoutException with the specified detail message,configurable timeout.
      *
-     * @param msg the detail message
+     * @param msg           the detail message
      * @param timeoutMillis configurable timeout
      */
     public RemotingTimeoutException(String msg, long timeoutMillis) {
@@ -40,9 +40,9 @@ public class RemotingTimeoutException extends RemotingAccessException {
      * Constructor for RemotingTimeoutException with the specified detail message,configurable timeout
      * and nested exception..
      *
-     * @param msg the detail message
+     * @param msg           the detail message
      * @param timeoutMillis configurable timeout
-     * @param cause Exception cause
+     * @param cause         Exception cause
      */
     public RemotingTimeoutException(String msg, long timeoutMillis, Throwable cause) {
         super(String.format("%s, waiting for %s ms", msg, timeoutMillis), cause);
@@ -61,7 +61,7 @@ public class RemotingTimeoutException extends RemotingAccessException {
      * Constructor for RemotingTimeoutException with the specified detail message
      * and nested exception.
      *
-     * @param msg the detail message
+     * @param msg   the detail message
      * @param cause the root cause from the remoting API in use
      */
     public RemotingTimeoutException(String msg, Throwable cause) {
