@@ -21,6 +21,7 @@ import link.thingscloud.vertx.remoting.RemotingBootstrapFactory;
 import link.thingscloud.vertx.remoting.api.AsyncHandler;
 import link.thingscloud.vertx.remoting.api.RemotingClient;
 import link.thingscloud.vertx.remoting.api.RemotingServer;
+import link.thingscloud.vertx.remoting.api.command.Payload;
 import link.thingscloud.vertx.remoting.api.command.RemotingCommand;
 import link.thingscloud.vertx.remoting.config.RemotingClientConfig;
 import link.thingscloud.vertx.remoting.config.RemotingServerConfig;
@@ -38,8 +39,8 @@ public class AbstractBenchmark {
 
         server.registerRequestProcessor(URI, 1, (channel, request) -> {
             RemotingCommand response = server.commandFactory().createResponse(request);
-            response.payload("zhouxinyu".getBytes());
-            System.out.println(new String(request.payload()));
+            response.payload(Payload.of("zhangyimou"));
+            System.out.println(request.payload());
             return response;
         });
         server.start();
@@ -50,7 +51,7 @@ public class AbstractBenchmark {
         RemotingCommand request = client.commandFactory().createRequest();
         request.cmdCode(1);
         request.cmdVersion(1);
-        request.payload("hello".getBytes());
+        request.payload(Payload.of("hello"));
         client.invokeAsync("127.0.0.1:8888", URI, request, new AsyncHandler() {
             @Override
             public void onFailure(RemotingCommand request, Throwable cause) {
@@ -60,7 +61,7 @@ public class AbstractBenchmark {
 
             @Override
             public void onSuccess(RemotingCommand response) {
-                System.out.println(new String(response.payload()));
+                System.out.println(response.payload());
             }
         }, 1000);
 
@@ -89,6 +90,6 @@ public class AbstractBenchmark {
      * Support channel types.
      */
     public enum ChannelType {
-        NIO, LOCAL;
+        NIO, LOCAL
     }
 }

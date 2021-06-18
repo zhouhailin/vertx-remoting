@@ -64,14 +64,12 @@ public class Bootstrap {
     @Autowired
     RemotingCommandFactory factory;
 
-    private static final String URI = "/uri/v1";
-
     @PostConstruct
     public void start() {
         RemotingCommand request = factory.createRequest();
         request.cmdCode((short) 13);
-        remotingClient.invokeOneWay("127.0.0.1:9888", URI, request);
-        remotingClient.invokeAsync("127.0.0.1:9888", URI, request, new AsyncHandler() {
+        remotingClient.invokeOneWay("127.0.0.1:9888", request);
+        remotingClient.invokeAsync("127.0.0.1:9888", request, new AsyncHandler() {
             @Override
             public void onFailure(RemotingCommand request, Throwable cause) {
                 LOG.info("invokeAsync onFailure : {}, cause : ", request, cause);
@@ -83,8 +81,8 @@ public class Bootstrap {
 
             }
         }, 1000);
-        remotingClient.invokeOneWay("127.0.0.1:9888", URI, request);
-        remotingClient.invokeAsync("127.0.0.1:9888", URI, request, new AsyncHandler() {
+        remotingClient.invokeOneWay("127.0.0.1:9888", request);
+        remotingClient.invokeAsync("127.0.0.1:9888", request, new AsyncHandler() {
             @Override
             public void onFailure(RemotingCommand request, Throwable cause) {
                 LOG.info("onFailure response : {}", request, cause);
@@ -99,7 +97,7 @@ public class Bootstrap {
 
     }
 
-    @RemotingRequestProcessor(uri = URI, code = 12, type = RemotingType.CLIENT)
+    @RemotingRequestProcessor(code = 12, type = RemotingType.CLIENT)
     class RequestProcessorImpl1 implements RequestProcessor {
         @Override
         public RemotingCommand processRequest(RemotingChannel channel, RemotingCommand request) {
@@ -108,7 +106,7 @@ public class Bootstrap {
         }
     }
 
-    @RemotingRequestProcessor(uri = URI, code = 13, type = RemotingType.SERVER)
+    @RemotingRequestProcessor(code = 13, type = RemotingType.SERVER)
     class RequestProcessorImpl2 implements RequestProcessor {
         @Override
         public RemotingCommand processRequest(RemotingChannel channel, RemotingCommand request) {
@@ -117,7 +115,7 @@ public class Bootstrap {
         }
     }
 
-    @RemotingRequestProcessor(uri = URI, code = 14)
+    @RemotingRequestProcessor(code = 14)
     class RequestProcessorImpl3 implements RequestProcessor {
         @Override
         public RemotingCommand processRequest(RemotingChannel channel, RemotingCommand request) {

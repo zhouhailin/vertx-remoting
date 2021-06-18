@@ -17,43 +17,18 @@
 
 package link.thingscloud.vertx.remoting.api.command;
 
-import java.util.Map;
+import java.util.HashMap;
 
-public interface RemotingCommand {
+/**
+ * @author zhouhailin
+ * @since 1.0.0
+ */
+public class Payload extends HashMap<String, Object> {
 
-    int cmdCode();
+    public static Payload of(Object value) {
+        Payload payload = new Payload();
+        payload.put("payload", value);
+        return payload;
+    }
 
-    RemotingCommand cmdCode(int code);
-
-    int cmdVersion();
-
-    RemotingCommand cmdVersion(int version);
-
-    int requestID();
-
-    RemotingCommand requestID(int value);
-
-    TrafficType trafficType();
-
-    RemotingCommand trafficType(TrafficType value);
-
-    int opCode();
-
-    RemotingCommand opCode(int value);
-
-    String remark();
-
-    RemotingCommand remark(String value);
-
-    Map<String, String> properties();
-
-    String property(String key);
-
-    RemotingCommand property(String key, String value);
-
-    Payload payload();
-
-    RemotingCommand payload(Payload payload);
-
-    <T> T decodePayload(Class<T> type);
 }

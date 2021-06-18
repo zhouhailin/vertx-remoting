@@ -17,6 +17,8 @@
 
 package link.thingscloud.vertx.remoting.impl.command;
 
+import io.vertx.core.json.Json;
+import link.thingscloud.vertx.remoting.api.command.Payload;
 import link.thingscloud.vertx.remoting.api.command.RemotingCommand;
 import link.thingscloud.vertx.remoting.api.command.TrafficType;
 import org.apache.commons.lang3.builder.*;
@@ -44,7 +46,7 @@ public class RemotingCommandImpl implements RemotingCommand {
     private Map<String, String> properties = new HashMap<>();
 
     @ToStringExclude
-    private byte[] payload;
+    private Payload payload;
 
     @Override
     public int cmdCode() {
@@ -129,14 +131,19 @@ public class RemotingCommandImpl implements RemotingCommand {
     }
 
     @Override
-    public byte[] payload() {
+    public Payload payload() {
         return this.payload;
     }
 
     @Override
-    public RemotingCommandImpl payload(byte[] payload) {
+    public RemotingCommandImpl payload(Payload payload) {
         this.payload = payload;
         return this;
+    }
+
+    @Override
+    public <T> T decodePayload(Class<T> type) {
+        return Json.CODEC.fromValue(payload, type);
     }
 
     @Override
@@ -217,11 +224,11 @@ public class RemotingCommandImpl implements RemotingCommand {
         return this;
     }
 
-    public byte[] getPayload() {
+    public Payload getPayload() {
         return payload;
     }
 
-    public RemotingCommandImpl setPayload(byte[] payload) {
+    public RemotingCommandImpl setPayload(Payload payload) {
         this.payload = payload;
         return this;
     }
