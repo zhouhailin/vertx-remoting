@@ -26,9 +26,19 @@ import java.util.concurrent.ExecutorService;
 
 public interface RemotingService extends ConnectionService, ObjectLifecycle {
 
+    String DEFAULT_URI = "/vertx/remoting";
+
     void registerInterceptor(Interceptor interceptor);
 
+    default void registerRequestProcessor(int requestCode, RequestProcessor processor) {
+        registerRequestProcessor(DEFAULT_URI, requestCode, processor);
+    }
+
     void registerRequestProcessor(String uri, int requestCode, RequestProcessor processor);
+
+    default void registerRequestProcessor(int requestCode, RequestProcessor processor, ExecutorService executor) {
+        registerRequestProcessor(DEFAULT_URI, requestCode, processor, executor);
+    }
 
     void registerRequestProcessor(String uri, int requestCode, RequestProcessor processor, ExecutorService executor);
 

@@ -21,7 +21,15 @@ import link.thingscloud.vertx.remoting.api.command.RemotingCommand;
 
 public interface RemotingClient extends RemotingService {
 
+    default void invokeAsync(String address, RemotingCommand request, AsyncHandler asyncHandler, long timeoutMillis) {
+        invokeAsync(address, DEFAULT_URI, request, asyncHandler, timeoutMillis);
+    }
+
     void invokeAsync(String address, String uri, RemotingCommand request, AsyncHandler asyncHandler, long timeoutMillis);
+
+    default void invokeOneWay(String address, RemotingCommand request) {
+        invokeOneWay(address, DEFAULT_URI, request);
+    }
 
     void invokeOneWay(String address, String uri, RemotingCommand request);
 }

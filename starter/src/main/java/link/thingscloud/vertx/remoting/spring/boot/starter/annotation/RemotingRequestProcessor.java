@@ -17,6 +17,7 @@
 
 package link.thingscloud.vertx.remoting.spring.boot.starter.annotation;
 
+import link.thingscloud.vertx.remoting.api.RemotingService;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +36,7 @@ public @interface RemotingRequestProcessor {
     @AliasFor(annotation = Component.class)
     String value() default "";
 
-    String uri();
+    String uri() default RemotingService.DEFAULT_URI;
 
     int code();
 
