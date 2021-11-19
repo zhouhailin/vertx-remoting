@@ -24,12 +24,12 @@ package link.thingscloud.vertx.remoting.config;
 public class RemotingServerConfig extends RemotingConfig {
 
     private int serverListenPort = 8888;
-    /**
-     * If server only listened 1 port,recommend to set the value to 1
-     */
 
-    private int serverOnewayInvokeSemaphore = 256;
-    private int serverAsyncInvokeSemaphore = 64;
+    /**
+     * If server only listened 1 port, recommend to set the value to 1
+     */
+    private final int serverOnewayInvokeSemaphore = 256;
+    private final int serverAsyncInvokeSemaphore = 64;
 
     public int getServerListenPort() {
         return serverListenPort;

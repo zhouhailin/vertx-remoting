@@ -33,6 +33,8 @@ import java.util.Properties;
 
 /**
  * Remoting Bootstrap entrance.
+ *
+ * @author zhouhailin
  */
 public final class RemotingBootstrapFactory {
 

@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class RequestIdGenerator {
     public static RequestIdGenerator inst = new RequestIdGenerator();
 
-    private AtomicInteger generator = new AtomicInteger(0);
+    private final AtomicInteger generator = new AtomicInteger(0);
 
     private RequestIdGenerator() {
     }

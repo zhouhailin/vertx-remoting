@@ -45,7 +45,7 @@ public final class ThreadUtils {
 
     public static ThreadFactory newGenericThreadFactory(final String processName, final boolean isDaemon) {
         return new ThreadFactory() {
-            private AtomicInteger threadIndex = new AtomicInteger(0);
+            private final AtomicInteger threadIndex = new AtomicInteger(0);
 
             @Override
             public Thread newThread(Runnable r) {
@@ -91,7 +91,7 @@ public final class ThreadUtils {
     public static ThreadFactory newGenericThreadFactory(final String processName, final int threads,
                                                         final boolean isDaemon) {
         return new ThreadFactory() {
-            private AtomicInteger threadIndex = new AtomicInteger(0);
+            private final AtomicInteger threadIndex = new AtomicInteger(0);
 
             @Override
             public Thread newThread(Runnable r) {

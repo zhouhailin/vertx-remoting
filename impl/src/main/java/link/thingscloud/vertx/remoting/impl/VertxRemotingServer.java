@@ -17,10 +17,12 @@
 
 package link.thingscloud.vertx.remoting.impl;
 
+import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
+import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.impl.logging.Logger;
 import io.vertx.core.impl.logging.LoggerFactory;
 import link.thingscloud.vertx.remoting.api.AsyncHandler;
@@ -37,10 +39,18 @@ import link.thingscloud.vertx.remoting.impl.context.VertxRemotingHandlerContext;
  */
 public class VertxRemotingServer extends VertxRemotingAbstract implements RemotingServer {
 
+    private Handler<HttpServerRequest> requestHandler = request -> {
+        if (HEALTH_CHECK.equals(request.path())) {
+            request.response().end("{\"status\":\"UP\"}");
+        }
+    };
+
     private final RemotingServerConfig config;
     private final Vertx vertx = Vertx.vertx(new VertxOptions().setWorkerPoolSize(40));
     private final HttpServerOptions httpServerOptions = new HttpServerOptions().setMaxWebSocketFrameSize(1000000);
     private final HttpServer httpServer = vertx.createHttpServer(httpServerOptions);
+
+    public static final String HEALTH_CHECK = "/health/check";
 
     private static final Logger LOG = LoggerFactory.getLogger(VertxRemotingServer.class);
 
@@ -54,6 +64,7 @@ public class VertxRemotingServer extends VertxRemotingAbstract implements Remoti
     public void start() {
         super.start();
         httpServer
+                .requestHandler(requestHandler)
                 .webSocketHandler(serverWebSocket -> {
                     String uri = serverWebSocket.uri();
                     VertxRemotingHandlerContext ctx = new VertxRemotingHandlerContext(uri, serverWebSocket);
@@ -92,6 +103,13 @@ public class VertxRemotingServer extends VertxRemotingAbstract implements Remoti
     @Override
     public int localListenPort() {
         return httpServer.actualPort();
+    }
+
+    @Override
+    public void setRequestHandler(Handler<HttpServerRequest> handler) {
+        if (handler != null) {
+            this.requestHandler = handler;
+        }
     }
 
     @Override

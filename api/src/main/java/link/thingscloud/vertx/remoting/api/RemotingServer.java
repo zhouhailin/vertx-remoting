@@ -17,12 +17,16 @@
 
 package link.thingscloud.vertx.remoting.api;
 
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpServerRequest;
 import link.thingscloud.vertx.remoting.api.channel.RemotingChannel;
 import link.thingscloud.vertx.remoting.api.command.RemotingCommand;
 
 public interface RemotingServer extends RemotingService {
 
     int localListenPort();
+
+    void setRequestHandler(Handler<HttpServerRequest> handler);
 
     void invokeAsync(RemotingChannel remotingChannel, RemotingCommand request, AsyncHandler asyncHandler, long timeoutMillis);
 

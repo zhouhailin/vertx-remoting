@@ -36,8 +36,8 @@ public class ResponseFuture {
     @ToStringExclude
     private final AtomicBoolean asyncHandlerExecuted = new AtomicBoolean(false);
 
-    private int requestId;
-    private long timeoutMillis;
+    private final int requestId;
+    private final long timeoutMillis;
 
     @ToStringExclude
     private AsyncHandler asyncHandler;
