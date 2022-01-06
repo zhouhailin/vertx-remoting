@@ -34,7 +34,7 @@ public class VertxRemotingHandlerContext implements RemotingHandlerContext {
     private final String uri;
     private final WebSocketBase webSocketBase;
     private final ChannelHandlerContext context;
-    private VertxRemotingChannel channel;
+    private final VertxRemotingChannel channel;
 
     public VertxRemotingHandlerContext(String uri, WebSocketBase webSocketBase) {
         this.uri = uri;

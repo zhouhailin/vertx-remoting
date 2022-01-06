@@ -17,6 +17,8 @@
 
 package link.thingscloud.vertx.remoting.spring.boot.starter.config;
 
+import io.vertx.core.Handler;
+import io.vertx.core.http.HttpServerRequest;
 import link.thingscloud.vertx.remoting.RemotingBootstrapFactory;
 import link.thingscloud.vertx.remoting.api.RemotingServer;
 import link.thingscloud.vertx.remoting.api.RequestProcessor;
@@ -44,6 +46,9 @@ public class RemotingServerAutoConfiguration extends AbstractRemotingAutoConfigu
     @Autowired(required = false)
     private List<RequestProcessor> requestProcessors = Collections.emptyList();
 
+    @Autowired(required = false)
+    private Handler<HttpServerRequest> handler;
+
     protected static final Logger LOG = LoggerFactory.getLogger(RemotingServerAutoConfiguration.class);
 
     @Bean(initMethod = "start", destroyMethod = "stop")
@@ -52,6 +57,7 @@ public class RemotingServerAutoConfiguration extends AbstractRemotingAutoConfigu
         registerInterceptor(remotingServer, RemotingType.SERVER);
         registerRequestProcessor(remotingServer, RemotingType.CLIENT);
         registerChannelEventListener(remotingServer, RemotingType.CLIENT);
+        remotingServer.setRequestHandler(handler);
         return remotingServer;
     }
 

@@ -28,7 +28,12 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * @author zhouhailin
+ * @since 1.0.0
+ */
 public class ResponseFuture {
+
     private final long beginTimestamp = System.currentTimeMillis();
 
     @ToStringExclude
@@ -36,8 +41,8 @@ public class ResponseFuture {
     @ToStringExclude
     private final AtomicBoolean asyncHandlerExecuted = new AtomicBoolean(false);
 
-    private int requestId;
-    private long timeoutMillis;
+    private final int requestId;
+    private final long timeoutMillis;
 
     @ToStringExclude
     private AsyncHandler asyncHandler;

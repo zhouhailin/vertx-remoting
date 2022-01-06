@@ -96,7 +96,7 @@ public abstract class VertxRemotingAbstract implements RemotingService {
     /**
      * Provides listener mechanism to handle netty channel events.
      */
-    private ChannelEventListenerGroup channelEventListenerGroup = new ChannelEventListenerGroup();
+    private final ChannelEventListenerGroup channelEventListenerGroup = new ChannelEventListenerGroup();
 
     /**
      * This map caches all on-going requests.
@@ -165,9 +165,7 @@ public abstract class VertxRemotingAbstract implements RemotingService {
     @Override
     public void registerRequestProcessor(String uri, int requestCode, RequestProcessor processor, ExecutorService executor) {
         Map<Integer, Pair<RequestProcessor, ExecutorService>> tables = processorTables.computeIfAbsent(uri, s -> new ConcurrentHashMap<>(8));
-        if (!tables.containsKey(requestCode)) {
-            tables.put(requestCode, new Pair<>(processor, executor));
-        }
+        tables.putIfAbsent(requestCode, new Pair<>(processor, executor));
     }
 
     @Override
@@ -454,7 +452,7 @@ public abstract class VertxRemotingAbstract implements RemotingService {
     class ChannelEventExecutor extends Thread {
         private final static int MAX_SIZE = 10000;
         private final LinkedBlockingQueue<NettyChannelEvent> eventQueue = new LinkedBlockingQueue<NettyChannelEvent>();
-        private String name;
+        private final String name;
 
         public ChannelEventExecutor(String nettyEventExector) {
             super(nettyEventExector);
