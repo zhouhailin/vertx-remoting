@@ -165,9 +165,7 @@ public abstract class VertxRemotingAbstract implements RemotingService {
     @Override
     public void registerRequestProcessor(String uri, int requestCode, RequestProcessor processor, ExecutorService executor) {
         Map<Integer, Pair<RequestProcessor, ExecutorService>> tables = processorTables.computeIfAbsent(uri, s -> new ConcurrentHashMap<>(8));
-        if (!tables.containsKey(requestCode)) {
-            tables.put(requestCode, new Pair<>(processor, executor));
-        }
+        tables.putIfAbsent(requestCode, new Pair<>(processor, executor));
     }
 
     @Override

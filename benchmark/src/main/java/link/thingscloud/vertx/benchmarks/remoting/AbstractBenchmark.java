@@ -17,15 +17,20 @@
 
 package link.thingscloud.vertx.benchmarks.remoting;
 
+import io.vertx.core.MultiMap;
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.http.HttpMethod;
 import link.thingscloud.vertx.remoting.RemotingBootstrapFactory;
 import link.thingscloud.vertx.remoting.api.AsyncHandler;
 import link.thingscloud.vertx.remoting.api.RemotingClient;
 import link.thingscloud.vertx.remoting.api.RemotingServer;
 import link.thingscloud.vertx.remoting.api.command.RemotingCommand;
+import link.thingscloud.vertx.remoting.common.RequestHandlerBuilder;
 import link.thingscloud.vertx.remoting.config.RemotingClientConfig;
 import link.thingscloud.vertx.remoting.config.RemotingServerConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 public class AbstractBenchmark {
 
@@ -34,6 +39,17 @@ public class AbstractBenchmark {
     protected static final Logger LOG = LoggerFactory.getLogger(AbstractBenchmark.class);
 
     public static void main(String[] args) throws InterruptedException {
+        RequestHandlerBuilder builder = RequestHandlerBuilder.newBuilder();
+        builder.request("/todo", new RequestHandlerBuilder.Callback() {
+            @Override
+            public RequestHandlerBuilder.Response apply(MultiMap headers, MultiMap params, Buffer body) {
+                System.out.println(params);
+                System.out.println(body);
+                return new RequestHandlerBuilder.Response("ok");
+            }
+        }, HttpMethod.GET, HttpMethod.POST);
+
+
         RemotingServer server = RemotingBootstrapFactory.createRemotingServer(new RemotingServerConfig());
 
         server.registerRequestProcessor(URI, 1, (channel, request) -> {
@@ -42,6 +58,8 @@ public class AbstractBenchmark {
             System.out.println(new String(request.payload()));
             return response;
         });
+
+        server.setRequestHandler(builder.build());
         server.start();
 
         RemotingClient client = RemotingBootstrapFactory.createRemotingClient(new RemotingClientConfig());

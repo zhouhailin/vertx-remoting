@@ -28,7 +28,12 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * @author zhouhailin
+ * @since 1.0.0
+ */
 public class ResponseFuture {
+
     private final long beginTimestamp = System.currentTimeMillis();
 
     @ToStringExclude
