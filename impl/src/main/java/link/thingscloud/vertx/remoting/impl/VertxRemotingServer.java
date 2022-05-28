@@ -49,6 +49,9 @@ public class VertxRemotingServer extends VertxRemotingAbstract implements Remoti
     private Handler<HttpServerRequest> requestHandler = request -> {
         if (HEALTH_CHECK.equals(request.path())) {
             request.response().end("{\"status\":\"UP\"}");
+        } else {
+            request.response().setStatusCode(404);
+            request.response().end();
         }
     };
 
