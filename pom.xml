@@ -41,7 +41,9 @@
         <!-- Compiler settings properties -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring-boot.version>2.5.0</spring-boot.version>
+
+        <vertx.version>4.3.1</vertx.version>
+        <spring-boot.version>2.7.0</spring-boot.version>
     </properties>
 
     <modules>
@@ -71,7 +73,7 @@
             <dependency>
                 <groupId>io.vertx</groupId>
                 <artifactId>vertx-dependencies</artifactId>
-                <version>4.1.0</version>
+                <version>${vertx.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -107,7 +109,7 @@
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
