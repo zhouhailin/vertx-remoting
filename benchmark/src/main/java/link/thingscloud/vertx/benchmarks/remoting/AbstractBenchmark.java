@@ -23,12 +23,11 @@ import io.vertx.core.http.HttpMethod;
 import link.thingscloud.vertx.remoting.RemotingBootstrapFactory;
 import link.thingscloud.vertx.remoting.api.AsyncHandler;
 import link.thingscloud.vertx.remoting.api.RemotingClient;
-import link.thingscloud.vertx.remoting.api.RemotingServer;
+import link.thingscloud.vertx.remoting.api.RemotingService;
 import link.thingscloud.vertx.remoting.api.command.Payload;
 import link.thingscloud.vertx.remoting.api.command.RemotingCommand;
 import link.thingscloud.vertx.remoting.common.RequestHandlerBuilder;
 import link.thingscloud.vertx.remoting.config.RemotingClientConfig;
-import link.thingscloud.vertx.remoting.config.RemotingServerConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,26 +50,26 @@ public class AbstractBenchmark {
         }, HttpMethod.GET, HttpMethod.POST);
 
 
-        RemotingServer server = RemotingBootstrapFactory.createRemotingServer(new RemotingServerConfig());
-
-        server.registerRequestProcessor(URI, 1, (channel, request) -> {
-            RemotingCommand response = server.commandFactory().createResponse(request);
-            response.payload(Payload.of("zhangyimou"));
-            System.out.println(request.payload());
-            return response;
-        });
-
-        server.setRequestHandler(builder.build());
-        server.start();
+//        RemotingServer server = RemotingBootstrapFactory.createRemotingServer(new RemotingServerConfig());
+//
+//        server.registerRequestProcessor(URI, 1, (channel, request) -> {
+//            RemotingCommand response = server.commandFactory().createResponse(request);
+//            response.payload(Payload.of("zhangyimou"));
+//            System.out.println(request.payload());
+//            return response;
+//        });
+//
+//        server.setRequestHandler(builder.build());
+//        server.start();
 
         RemotingClient client = RemotingBootstrapFactory.createRemotingClient(new RemotingClientConfig());
         client.start();
 
         RemotingCommand request = client.commandFactory().createRequest();
-        request.cmdCode(1);
+        request.cmdCode(12);
         request.cmdVersion(1);
         request.payload(Payload.of("hello"));
-        client.invokeAsync("127.0.0.1:8888", URI, request, new AsyncHandler() {
+        client.invokeAsync("127.0.0.1:9888", RemotingService.DEFAULT_URI, request, new AsyncHandler() {
             @Override
             public void onFailure(RemotingCommand request, Throwable cause) {
                 System.out.println(request);

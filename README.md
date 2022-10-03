@@ -150,6 +150,46 @@ public class Bootstrap {
 }
 ```
 
+## sdk
+
+### publish
+
+    npm publish
+
+### install
+
+    npm install vertx-remoting-client
+
+```text
+    import vrc from "vertx-remoting-client";
+
+    const that = this;
+    let nonce = '';
+    let token = '';
+    vrc
+        .init(this.vrc.url, true)
+        .auth(nonce, token)
+        .onOpened(function () {
+          console.log("vrc onOpened ...")
+          // auth
+        })
+        .onClosed(function () {
+          console.log("vrc onClosed ...")
+        }, function () {
+          console.log("onClosed set timeout.")
+          vrc.open(function () {
+            console.log("open completed....")
+          }, function (error) {
+            console.log("open error.", error)
+          });
+        }, 5000)
+        .open(function () {
+          console.log("open completed.")
+        }, function (error) {
+          console.log("open error.", error)
+        });
+```
+
 ## License
 
 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) Copyright (C) Apache Software Foundation

@@ -8,7 +8,6 @@
 	
 	const VERSION = 3;
 	var requestID = 1;
-	
 	const OP_CODE_SUCCESS = 0;
     const OP_CODE_SYSTEM_ERROR = 1;
     const OP_CODE_SYSTEM_BUSY = 2;
@@ -101,7 +100,7 @@
 	}
 	
 	function createRequest(cmdCode, trafficType, remark, properties, payload){
-		var cmd = {};
+		const cmd = {};
 		cmd.cmdCode = cmdCode;
 		cmd.cmdVersion = VERSION;
 		cmd.requestId = requestID++;

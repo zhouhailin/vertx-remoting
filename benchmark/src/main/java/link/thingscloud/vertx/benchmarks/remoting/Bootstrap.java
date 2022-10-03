@@ -17,6 +17,7 @@
 
 package link.thingscloud.vertx.benchmarks.remoting;
 
+import link.thingscloud.vertx.remoting.RemotingBootstrapFactory;
 import link.thingscloud.vertx.remoting.api.AsyncHandler;
 import link.thingscloud.vertx.remoting.api.RemotingClient;
 import link.thingscloud.vertx.remoting.api.RemotingServer;
@@ -61,8 +62,8 @@ public class Bootstrap {
     RemotingClient remotingClient;
     @Autowired
     RemotingServer remotingServer;
-    @Autowired
-    RemotingCommandFactory factory;
+
+    RemotingCommandFactory factory = RemotingBootstrapFactory.createRemotingCommandFactory();
 
     @PostConstruct
     public void start() {

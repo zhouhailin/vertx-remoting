@@ -83,6 +83,7 @@ public class VertxRemotingChannel implements RemotingChannel {
         webSocketBase.writeTextMessage(CodecHelper.encodeCommand(command), ar -> listener.operationComplete(new ChannelFutureImpl(ar.succeeded(), ar.cause())));
     }
 
+    @Override
     public String toString() {
         return "NettyChannelImpl [channel=" + channel + "]";
     }

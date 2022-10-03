@@ -94,7 +94,7 @@ public class VertxRemotingServer extends VertxRemotingAbstract implements Remoti
                                 putNettyEvent(new NettyChannelEvent(NettyChannelEventType.EXCEPTION, ctx.channel(), cause));
                             });
                 })
-                .listen(config.getServerListenPort());
+                .listen(config.getServerListenPort(), event -> LOG.info(String.format("Vertx Remoting initialized with port(s): %d (websocket)", config.getServerListenPort())));
     }
 
     @Override

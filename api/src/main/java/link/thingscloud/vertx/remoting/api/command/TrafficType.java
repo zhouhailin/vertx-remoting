@@ -17,6 +17,10 @@
 
 package link.thingscloud.vertx.remoting.api.command;
 
+/**
+ * @author zhouhailin
+ */
+
 public enum TrafficType {
     REQUEST_SYNC,
     REQUEST_ASYNC,

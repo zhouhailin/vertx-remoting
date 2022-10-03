@@ -26,6 +26,9 @@ import link.thingscloud.vertx.remoting.api.command.RemotingCommand;
  */
 public class CodecHelper {
 
+    private CodecHelper() {
+    }
+
     public static String encodeCommand(final RemotingCommand command) {
         return Json.encode(command);
     }

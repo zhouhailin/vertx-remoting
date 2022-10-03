@@ -19,7 +19,11 @@ package link.thingscloud.vertx.remoting.impl.command;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * @author zhouhailin
+ */
 public class RequestIdGenerator {
+
     public static RequestIdGenerator inst = new RequestIdGenerator();
 
     private final AtomicInteger generator = new AtomicInteger(0);

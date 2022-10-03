@@ -22,7 +22,11 @@ import link.thingscloud.vertx.remoting.api.command.RemotingCommand;
 import link.thingscloud.vertx.remoting.api.command.RemotingCommandFactory;
 import link.thingscloud.vertx.remoting.api.command.TrafficType;
 
+/**
+ * @author zhouhailin
+ */
 public class RemotingCommandFactoryImpl implements RemotingCommandFactory {
+
     public RemotingCommandFactoryImpl() {
     }
 

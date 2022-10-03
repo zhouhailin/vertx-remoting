@@ -17,6 +17,8 @@
 
 package link.thingscloud.vertx.remoting.api.command;
 
+import io.vertx.core.json.JsonObject;
+
 import java.util.HashMap;
 
 /**
@@ -25,9 +27,15 @@ import java.util.HashMap;
  */
 public class Payload extends HashMap<String, Object> {
 
-    public static Payload of(Object value) {
+    public static Payload of(String value) {
         Payload payload = new Payload();
         payload.put("payload", value);
+        return payload;
+    }
+
+    public static Payload of(Object value) {
+        Payload payload = new Payload();
+        JsonObject.mapFrom(value).forEach(entry -> payload.put(entry.getKey(), entry.getValue()));
         return payload;
     }
 
