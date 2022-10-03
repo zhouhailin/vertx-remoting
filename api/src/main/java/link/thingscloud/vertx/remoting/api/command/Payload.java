@@ -29,7 +29,7 @@ public class Payload extends HashMap<String, Object> {
 
     public static Payload of(String value) {
         Payload payload = new Payload();
-        payload.put("payload", value);
+        payload.put("body", value);
         return payload;
     }
 

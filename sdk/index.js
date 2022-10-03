@@ -11,6 +11,7 @@ const vrc = {
             // 0 - none, 1 - need, 2 - success, 3 - failed
             state: 0,
             resp: null,
+            handle: null,
             payload: {
                 nonce: '',
                 token: ''
@@ -142,12 +143,13 @@ const vrc = {
                 let payload = cmd.payload;
                 if (payload.code === 200) {
                     that.options.auth.state = 2;
-                    console.log(payload.message);
                 } else {
                     that.options.auth.state = 3;
                     that.options.auth.resp = payload;
-                    console.log(payload.message);
                     that.close();
+                }
+                if (that.options.auth.handle) {
+                    that.options.auth.handle(payload);
                 }
             }, function (error) {
                 console.log("auth failed ", error)
@@ -184,9 +186,9 @@ const vrc = {
             error('socket is closed.');
         }
     },
-    registerRequestProcessor(code, callback) {
-        if (callback) {
-            this.options.callback.request.set(code, callback);
+    addEventListener(code, listener) {
+        if (listener) {
+            this.options.callback.request.set(code, listener);
         }
     },
     invokeOneway(code, payload, error) {
@@ -215,10 +217,13 @@ exports.init = function (url, debug) {
     return this;
 }
 
-exports.auth = function (nonce, token) {
+exports.auth = function (nonce, token, handle) {
     vrc.options.auth.state = 1;
     vrc.options.auth.payload.nonce = nonce;
     vrc.options.auth.payload.token = token;
+    if (handle) {
+        vrc.options.auth.handle = handle;
+    }
     return this;
 }
 
@@ -248,6 +253,10 @@ exports.onClosed = function (callback, handle, timeout) {
     return this;
 }
 
+exports.createResponse = function (request) {
+    return vrc.createResponse(request);
+}
+
 exports.invokeOneway = function (code, payload, error) {
     vrc.invokeOneway(code, payload, error);
     return this;
@@ -268,8 +277,8 @@ exports.invokeAsync0 = function (code, remark, properties, payload, callback, in
     return this;
 }
 
-exports.registerRequestProcessor = function (code, callback) {
-    vrc.registerRequestProcessor(code, callback);
+exports.addEventListener = function (code, listener) {
+    vrc.addEventListener(code, listener);
     return this;
 }
 

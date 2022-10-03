@@ -1,6 +1,6 @@
 {
   "name": "vertx-remoting-client",
-  "version": "1.1.27",
+  "version": "1.1.30",
   "description": "vertx remoting client for javascript",
   "main": "index.js",
   "scripts": {
